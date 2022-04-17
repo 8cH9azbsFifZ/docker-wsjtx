@@ -27,6 +27,7 @@ RUN cat /root/novnc/vnc_lite.html | sed 's/<title>noVNC/<title>WineNoVNC/g' > /r
 RUN apt-get -y install wsjtx
 
 ADD ./config/xfce4 /root/.config/xfce4
+ADD ./config/WSJT-X.ini /root/.config/
 # Add startup stuff
 ADD ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
