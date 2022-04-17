@@ -1,0 +1,11 @@
+version: '2.2'
+
+services:
+    wsjtx:
+        build: .
+        privileged: true
+        volumes:
+            /dev/bus/usb:/dev/bus/usb
+            wsjt-config:/root/.config/WSJT-X.ini
+        ports:
+            - 8081:8080
