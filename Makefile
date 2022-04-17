@@ -1,9 +1,9 @@
-VER=0.4
+VER=0.1
 
 # Must be LOWERCASE
 USER=8ch9azbsfifz
-REPO=debian-wine
-TAG=docker.pkg.github.com/${USER}/${REPO}/winevnc
+REPO=docker-wsjtx
+TAG=docker.pkg.github.com/${USER}/${REPO}/wsjtx
 
 build:
 	docker build . -t ${TAG}:${VER} -t ${TAG}:latest
