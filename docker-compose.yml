@@ -6,7 +6,7 @@ services:
         image: docker.pkg.github.com/8ch9azbsfifz/docker-wsjtx/wsjtx:0.1
         privileged: true
         volumes:
-            /dev/bus/usb:/dev/bus/usb
-            wsjt-config:/root/.config/WSJT-X.ini
+            - /dev/bus/usb:/dev/bus/usb
+            - ./WSJT-X.ini:/root/.config/WSJT-X.ini
         ports:
             - 8081:8080
