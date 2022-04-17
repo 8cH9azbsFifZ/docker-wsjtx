@@ -24,13 +24,12 @@ RUN wget -O - https://github.com/novnc/websockify/archive/v${V_WEBSOCKIFY}.tar.g
 # Configure window title
 RUN cat /root/novnc/vnc_lite.html | sed 's/<title>noVNC/<title>WineNoVNC/g' > /root/novnc/tmp.html && cat /root/novnc/tmp.html > /root/novnc/vnc_lite.html && rm /root/novnc/tmp.html
 
+RUN apt-get -y install wsjtx
 
 ADD ./config/xfce4 /root/.config/xfce4
 # Add startup stuff
 ADD ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-
-RUN apt-get -y install wsjtx
 
 EXPOSE 8080
 CMD ["/usr/bin/supervisord"]
