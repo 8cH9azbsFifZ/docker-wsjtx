@@ -33,5 +33,7 @@ ADD ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 
 EXPOSE 8080
+EXPOSE 2237
+
 CMD ["/usr/bin/supervisord"]
 
