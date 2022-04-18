@@ -26,6 +26,12 @@ RUN cat /root/novnc/vnc_lite.html | sed 's/<title>noVNC/<title>WineNoVNC/g' > /r
 
 RUN apt-get -y install wsjtx
 
+# Install UDP service client
+RUN apt-get -y install git python3-pip vim
+RUN git clone https://github.com/8cH9azbsFifZ/py_wsjtx.git
+RUN cd py_wsjtx && pip3 install -r requirements.txt
+RUN apt-get -y install mqtt python3-paho-mqtt
+
 ADD ./config/xfce4 /root/.config/xfce4
 ADD ./config/WSJT-X.ini /root/.config/
 # Add startup stuff
