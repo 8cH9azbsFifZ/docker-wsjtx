@@ -12,15 +12,16 @@ ENV DISPLAY :0
 
 
 FROM wine AS novnc
-ENV V_NOVNC 1.1.0
-ENV V_WEBSOCKIFY 0.9.0
-# Install noVNC stuff
-WORKDIR /root/
-RUN wget -O - https://github.com/novnc/noVNC/archive/v${V_NOVNC}.tar.gz | tar -xzv -C /root/ && mv /root/noVNC-${V_NOVNC} /root/novnc && ln -s /root/novnc/vnc_lite.html /root/novnc/index.html
-RUN wget -O - https://github.com/novnc/websockify/archive/v${V_WEBSOCKIFY}.tar.gz | tar -xzv -C /root/ && mv /root/websockify-${V_WEBSOCKIFY} /root/novnc/utils/websockify
-# Configure window title
-RUN cat /root/novnc/vnc_lite.html | sed 's/<title>noVNC/<title>WineNoVNC/g' > /root/novnc/tmp.html && cat /root/novnc/tmp.html > /root/novnc/vnc_lite.html && rm /root/novnc/tmp.html
-
+# ENV V_NOVNC 1.1.0
+# ENV V_WEBSOCKIFY 0.9.0
+# # Install noVNC stuff
+# WORKDIR /root/
+# RUN wget -O - https://github.com/novnc/noVNC/archive/v${V_NOVNC}.tar.gz | tar -xzv -C /root/ && mv /root/noVNC-${V_NOVNC} /root/novnc && ln -s /root/novnc/vnc_lite.html /root/novnc/index.html
+# RUN wget -O - https://github.com/novnc/websockify/archive/v${V_WEBSOCKIFY}.tar.gz | tar -xzv -C /root/ && mv /root/websockify-${V_WEBSOCKIFY} /root/novnc/utils/websockify
+# # Configure window title
+# RUN cat /root/novnc/vnc_lite.html | sed 's/<title>noVNC/<title>WineNoVNC/g' > /root/novnc/tmp.html && cat /root/novnc/tmp.html > /root/novnc/vnc_lite.html && rm /root/novnc/tmp.html
+RUN apt-get -y install novnc python3-websockify
+#RUN openssl req -x509 -nodes -newkey rsa:3072 -keyout novnc.pem -out novnc.pem -days 3650
 
 # Install UDP service client
 # RUN git clone https://github.com/8cH9azbsFifZ/py_wsjtx.git
@@ -36,5 +37,14 @@ ADD ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 8080
 EXPOSE 2237
 
-CMD ["/usr/bin/supervisord"]
+RUN apt-get -y install tigervnc-standalone-server
+RUN apt-get -y install dbus-x11
+RUN mkdir /root/.vnc 
+RUN echo geheim | vncpasswd -f > /root/.vnc/passwd
+RUN chmod 0600 /root/.vnc/passwd
+
+COPY entrypoint.sh .
+
+#CMD ["/usr/bin/supervisord"]
+CMD ["./entrypoint.sh"]
 

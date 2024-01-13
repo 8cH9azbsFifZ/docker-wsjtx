@@ -2,11 +2,11 @@ version: '2.2'
 
 services:
     wsjtx:
-        image: ghcr.io/8ch9azbsfifz/docker-wsjtx
+        image: wsjtx #ghcr.io/8ch9azbsfifz/docker-wsjtx
         privileged: true
         volumes:
             - /dev/bus/usb:/dev/bus/usb
-            - ./WSJT-X.ini:/root/.config/WSJT-X.ini
+            #- ./WSJT-X.ini:/root/.config/WSJT-X.ini
         ports:
             - 8081:8080
             - 2237:2237/udp
