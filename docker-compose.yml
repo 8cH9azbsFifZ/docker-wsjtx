@@ -4,6 +4,12 @@ services:
     wsjtx:
         image: wsjtx #ghcr.io/8ch9azbsfifz/docker-wsjtx
         privileged: true
+        environment:
+            - MYCALL=FIXME
+            - MYGRID=FIXME
+            - RIG=FiFi FiFi-SDR
+            - SOUNDINPUT=plughw:CARD=FiFiSDR,DEV=0
+            - SOUNDOUTPUT=hw:CARD=Headphones,DEV=0
         volumes:
             - /dev/bus/usb:/dev/bus/usb
             #- ./WSJT-X.ini:/root/.config/WSJT-X.ini
