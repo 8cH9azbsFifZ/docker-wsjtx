@@ -1,5 +1,4 @@
 FROM debian:buster AS wine
-MAINTAINER Gerolf Ziegenhain <gerolf.ziegenhain@gmail.com>
 
 # Install Wine, XFCE, network audio stuff
 ENV HOME /root

@@ -2,8 +2,7 @@ version: '2.2'
 
 services:
     wsjtx:
-        #build: .
-        image: docker.pkg.github.com/8ch9azbsfifz/docker-wsjtx/wsjtx:0.1
+        image: ghcr.io/8ch9azbsfifz/docker-wsjtx
         privileged: true
         volumes:
             - /dev/bus/usb:/dev/bus/usb
