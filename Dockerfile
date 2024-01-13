@@ -28,6 +28,12 @@ COPY entrypoint.sh .
 COPY ./config/WSJT-X.template.ini .
 COPY ./config/WSJT-X.ini .
 
+ENV MYCALL=FIXME
+ENV MYGRID=FIXME
+ENV RIG=FiFi
+ENV SOUNDINPUT=plughw:CARD=FiFiSDR,DEV=0
+ENV SOUNDOUTPUT=hw:CARD=Headphones,DEV=0
+
 EXPOSE 8080
 EXPOSE 2237
 
